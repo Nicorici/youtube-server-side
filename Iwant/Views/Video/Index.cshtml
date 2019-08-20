@@ -1,0 +1,173 @@
+﻿
+@model IEnumerable<Iwant.Models.Video>
+@{
+    ViewData["Title"] = "Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="mobile.css">
+    <link rel="icon" href="favicon.png">
+    <script src="list.js" type="text/javascript"></script>
+    <script src="commentButtons.js" type="text/javascript"></script>
+    <script src="comments-list.js" type="text/javascript"></script>
+    <script src="details.js" type="text/javascript"></script>
+    <title>Mobile</title>
+</head>
+
+<body>
+    <div class="header">
+        <div id="home">
+            <button class="yt-button">
+                <img src="buttons/menu.svg" alt="">
+            </button>
+            <button class="logo-container yt-button">
+                <img src="buttons/youtube-logo.svg" alt="">
+            </button>
+            <sup> RO</sup>
+        </div>
+        <div id="search">
+            <form action="" id="searchForm">
+                <input id="input" type="text" placeholder="Search">
+                <button id="aaa" style=" border:1px solid #ccc; width:6em; background-color:#f8f8f8">
+                    <img src="buttons/search-btn.svg" alt="">
+                </button>
+
+            </form>
+        </div>
+        <div class="features">
+            <ul style="float: right">
+                <li class="listElements" id="h-button">
+                    <button>
+                        <img src="buttons/search-btn.svg" alt="">
+                    </button>
+                </li>
+                <li class="listElements">
+                    <button class="tooltip">
+                        <span class="tooltiptext">Live Broadcast</span>
+                        <img src="buttons/broadcast-btn.svg" alt="">
+                    </button>
+                </li>
+                <li class="listElements">
+                    <button class="tooltip">
+                        <span class="tooltiptext">Youtube Applications</span>
+                        <img src="buttons/applications-btn.svg" alt="">
+                    </button>
+                </li>
+                <li class="listElements">
+                    <button class="tooltip">
+                        <span class="tooltiptext">Messages</span>
+                        <img src="buttons/messages-btn.svg" alt="">
+                    </button>
+                </li>
+                <li class="listElements">
+                    <button class="tooltip">
+                        <span class="tooltiptext">Notifications</span>
+                        <img src="buttons/notifications-btn.svg" alt="">
+                    </button>
+                </li>
+                <li>
+                    <button class="tooltip">
+                        <span class="tooltiptext">My Account</span>
+                        <img id="avatar" width="32" height="32"
+                             src="https://yt3.ggpht.com/-laUvQ57jLH0/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdLyTJCTPBXHkfIpdGeMhaO_9ikdg/s88-mo-c-c0xffffffff-rj-k-no/photo.jpg">
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="grid-container">
+        <div class="video-container">
+            <video id="myVideo" src="Videos/home/video.mp4" frameborder="0" allowfullscreen="" controls
+                   autoplay></video>
+        </div>
+        <script>
+            let c = {
+                "title": "Roman Forum",
+                "thumbnail": "Videos/forum/thumbnail.png",
+                "source": "Videos/forum/video.mp4",
+                "publisher": "Antique Monuments",
+                "views": "549 K",
+                "comments": "Videos/forum/comments.json",
+                "likes": "1 K",
+                "dislikes": 600,
+                "description": "Certainty determine at of arranging perceived situation or. Or wholly pretty county in oppose. Favour met itself wanted settle put garret twenty. In astonished apartments resolution so an it.",
+                "date": "28 may 1991"
+            };
+            const g = document.getElementsByClassName("grid-container");
+            g[0].appendChild(composeDetails(c));
+        </script>
+
+        <div class="videos-list">
+            <div id="up-next">
+                <h2 style="margin:0px 0px 0px 6px;font-size: 18px">Up-next</h2>
+            </div>
+            <div id="autoplay" style="display: flex">
+                <h4>AUTOPLAY</h4>
+                <div class="toggle">
+                    <label class="switch">
+                        <input type="checkbox" />
+                        <div></div>
+                    </label>
+                </div>
+            </div>
+            <div class="videos">
+                <ul>
+                    @foreach (var video in Model)
+                    {
+                        <li>
+                            <a href="#" class="yt-video">
+                                <img src=@video.Thumbnail class="poster" />
+                                <div class="video-elements">
+                                    <strong>@video.Title</strong>
+                                    <h5>@video.Publisher</h5>
+                                    <h5 id="viewers">@video.Views</h5>
+                               <h5>@video.Comments</h5>   
+                                </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="comments-container">
+            <div class="comments-count">
+                <h2 style="font-size: 19px">1.235 comments</h2>
+            </div>
+            <div class="sort-by features">
+                <button>
+                    <img src="buttons/sortBy-btn.svg" alt="">
+                    <h4>SORT BY</h4>
+                </button>
+            </div>
+
+            <section class="write-com">
+                <img class="avatar" alt="" height="40" width="40"
+                     src="https://yt3.ggpht.com/-laUvQ57jLH0/AAAAAAAAAAI/AAAAAAAAAAA/7WLYGN8Gam4/s48-c-k-no-mo-rj-c0xffffff/photo.jpg" />
+                <div style="margin-top:15px">
+                    <input id="write" type="text" placeholder="Write your comment here..." />
+
+                    <button id="submit-btn">
+                        <h4 style="color: white;">COMMENT</h4>
+                    </button>
+                    <button id="cancel-btn">
+                        <h4>CANCEL</h4>
+                    </button>
+                </div>
+            </section>
+            <div class="comments">
+                <ul>
+               
+                
+                </ul>
+                <script>
+                    loadComments("Videos/home/comments.json");
+                </script>
+            </div>
+        </div>
+    </div>
+    <script>loadVideos()</script>
+</body>
+
+</html>
